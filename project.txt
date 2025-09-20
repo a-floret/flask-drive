@@ -1,0 +1,49 @@
+🔹 Étape 1 : Application Flask
+
+    Créer une API Flask qui expose :
+
+    Une route /upload (upload d’un fichier).
+    Une route /files (liste les fichiers disponibles).
+    Une route /download/<filename> (téléchargement d’un fichier).
+    Les fichiers doivent être stockés dans un dossier persistant (volume).
+
+🔹 Étape 2 : Base de données
+
+    Ajouter une petite base SQLite (ou PostgreSQL si tu veux aller plus loin).
+    À chaque upload, tu enregistres dans la base :
+    nom du fichier
+    taille
+    date d’upload
+
+    La route /files doit renvoyer ces infos.
+
+🔹 Étape 3 : Conteneurisation
+
+    Construire une image avec Podman/Docker pour ton app Flask.
+    Monter un volume pour stocker les fichiers (afin qu’ils persistent après un redémarrage).
+
+🔹 Étape 4 : Multi-conteneurs
+
+    Ajouter un deuxième conteneur Nginx (ou Caddy) :
+    il sert les fichiers statiques (les uploads).
+    il reverse-proxy les routes API vers Flask.
+
+🔹 Étape 5 : Réseau
+
+    Créer un réseau custom où Flask et Nginx communiquent.
+    Depuis ton navigateur, tu ne parles qu’à Nginx.
+
+🔹 Étape 6 : Kubernetes
+
+    Transformer tout ça en manifests K8s :
+
+    1 Deployment Flask
+    1 Deployment Nginx
+    1 Service par composant
+    1 PersistentVolumeClaim pour stocker les fichiers
+
+    Vérifier que l’app reste dispo même si un Pod Flask redémarre.
+
+🔹 Étape 7 (bonus) : Observabilité
+
+    Ajouter un sidecar conteneur qui logge les uploads (ex : un conteneur BusyBox qui lit un volume partagé et imprime dans stdout).
