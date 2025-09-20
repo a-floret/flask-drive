@@ -1,10 +1,11 @@
-from flask import Flask, request, render_template, send_from_directory
-import os
+from flask import Flask, request, render_template, send_file, abort
+import io
+from db import init_db, add_file, get_all_files, get_file_by_id
 
 app = Flask(__name__)
 
-FILE_FOLDER = "/database"
-os.makedirs(FILE_FOLDER, exist_ok=True)
+# Init DB au lancement
+init_db()
 
 @app.route("/")
 def home():
@@ -21,24 +22,30 @@ def upload():
             if file.filename == "":
                 message = "Nom de fichier vide"
             else:
-                filepath = os.path.join(FILE_FOLDER, file.filename)
-                file.save(filepath)
-                message = f"✅ Fichier {file.filename} uploadé avec succès !"
+                data = file.read()  # contenu binaire
+                add_file(file.filename, data)
+                message = f"✅ Fichier {file.filename} enregistré en base !"
 
     return render_template("upload.html", message=message)
 
 @app.route("/files")
 def files():
-    filenames = os.listdir(FILE_FOLDER)
-    return render_template('files.html', files=filenames)
+    files = get_all_files()
+    return render_template("files.html", files=files)
 
-@app.route('/files/<path:filename>')
-def file(filename):
-    return send_from_directory(
-        os.path.abspath(FILE_FOLDER),
-        filename,
+@app.route("/download/<int:file_id>")
+def download(file_id):
+    """Télécharge un fichier stocké en base"""
+    row = get_file_by_id(file_id)
+    if row is None:
+        abort(404)
+    filename, data = row
+    return send_file(
+        io.BytesIO(data),
+        download_name=filename,
         as_attachment=True
     )
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+    

@@ -5,14 +5,16 @@
     <title>Liste des fichiers</title>
 </head>
 <body>
-    <h1>Liste des fichier uploadés</h1>
+    <h2>Fichiers disponibles</h2>
     <ul>
-    {% for file in files %}
-        <li><a href="{{ url_for('file', filename=file) }}">{{ file }}</a></li>
-    {% endfor %}
+        {% for id, filename, uploaded_at in files %}
+            <li>
+                {{ filename }} (ajouté le {{ uploaded_at }} UTC)
+                — <a href="{{ url_for('download', file_id=id) }}">Télécharger</a>
+            </li>
+        {% endfor %}
     </ul>
 
-    <br>
     <form action="/">
         <button type="submit">🏠 Retour à l’accueil</button>
     </form>
