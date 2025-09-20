@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des fichiers</title>
+</head>
+<body>
+    <h1>Liste des fichier uploadés</h1>
+    <ul>
+    {% for file in files %}
+        <li><a href="{{ url_for('file', filename=file) }}">{{ file }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <br>
+    <form action="/">
+        <button type="submit">🏠 Retour à l’accueil</button>
+    </form>
+</body>
+</html>

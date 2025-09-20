@@ -2,10 +2,9 @@
 
     Créer une API Flask qui expose :
 
-    Une route /upload (upload d’un fichier).
-    Une route /files (liste les fichiers disponibles).
-    Une route /download/<filename> (téléchargement d’un fichier).
-    Les fichiers doivent être stockés dans un dossier persistant (volume).
+        - Une route /upload (upload d’un fichier).
+        - Une route /files (liste les fichiers disponibles et permet de les télécharger).
+        - Les fichiers doivent être stockés dans un dossier persistant (volume).
 
 🔹 Étape 2 : Base de données
 
