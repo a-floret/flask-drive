@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload un fichier</title>
+</head>
+<body>
+    <h2>Uploader un fichier</h2>
+
+    {% if message %}
+        <p style="color:green;">{{ message }}</p>
+    {% endif %}
+
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Uploader">
+    </form>
+</body>
+</html>
