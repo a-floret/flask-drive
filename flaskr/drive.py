@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, send_file, abort, redirect, u
 import io
 from db import *
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static/")
 
 @app.route("/")
 def home():
@@ -19,7 +19,7 @@ def upload():
             if file.filename == "":
                 message = "Nom de fichier vide"
             else:
-                data = file.read()  # contenu binaire
+                data = file.read()
                 add_file(file.filename, data)
                 message = f"✅ Fichier {file.filename} enregistré en base !"
 

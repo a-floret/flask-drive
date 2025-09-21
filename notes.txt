@@ -1,14 +1,17 @@
 Build image:
-    podman build -t flask-drive -f docker/flask/Dockerfile .
     podman build -t postgres-drive -f docker/postgres/Dockerfile .
-
+    podman build -t flask-drive -f docker/flask/Dockerfile .
+    podman build -t proxy-drive -f docker/nginx/Dockerfile .
+    
 Run container
-    podman run -d --name drive -p 5000:5000 flask-drive
-    podman run --name postgres --env-file flaskr/.env -p 5432:5432 -v drive-database:/var/lib/postgresql/data -d postgres-drive
+    podman run -d --name postgres --env-file flaskr/.env -p 5432:5432 -v drive-database:/var/lib/postgresql/data --network drive-n postgres-drive
+    podman run -d --name drive --network drive-n flask-drive
+    podman run -d --name proxy -p 8080:80 --network drive-n proxy-drive
 
 Use database:
     psql -h localhost -p 5432 -U flaskuser -d flaskdb
 
 Stop and prune
+    podman stop proxy && podman rm proxy
     podman stop drive && podman rm drive
     podman stop postgres && podman rm postgres
