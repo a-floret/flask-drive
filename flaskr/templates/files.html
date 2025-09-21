@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des fichiers</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h2>Fichiers disponibles</h2>
+    <div class="header">
+        <h1>📂 Fichiers disponibles</h1>
+        <a href="/" class="btn-retour">🏠 Retour à l’accueil</a>
+    </div>
     <ul>
         {% for id, filename, uploaded_at in files %}
             <li>
                 {{ filename }} (ajouté le {{ uploaded_at }} UTC)
-                — <a href="{{ url_for('download', file_id=id) }}">Télécharger</a>
+                — <a href="{{ url_for('download', file_id=id) }}">⬇️ Télécharger</a>
+                — <a href="{{ url_for('delete', file_id=id) }}" style="color:red;">❌ Supprimer</a>
             </li>
         {% endfor %}
     </ul>
 
-    <form action="/">
-        <button type="submit">🏠 Retour à l’accueil</button>
-    </form>
 </body>
 </html>

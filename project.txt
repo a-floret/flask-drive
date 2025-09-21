@@ -16,10 +16,12 @@
 
     La route /files doit renvoyer ces infos.
 
-🔹 Étape 3 : Conteneurisation
+    Bonus: Ajout d'une option de delete
 
-    Construire une image avec Podman/Docker pour ton app Flask.
-    Monter un volume pour stocker les fichiers (afin qu’ils persistent après un redémarrage).
+🔹 Étape 3 : Migrer la base sqlite vers un conteneur Postgres
+
+    Construire une image avec Podmanpour de la base Postgres
+    Monter un volume pour stocker les fichiers (afin qu’ils persistent après un redémarrage) + réseau pour faire communiquer les conteneurs
 
 🔹 Étape 4 : Multi-conteneurs
 

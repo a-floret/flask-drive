@@ -39,3 +39,10 @@ def get_file_by_id(file_id):
     conn.close()
     return row
 
+def delete_file_by_id(file_id):
+    """Supprime l'entrée ayant le file_id"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM files where id = ?", (file_id,))
+    conn.commit()
+    conn.close()

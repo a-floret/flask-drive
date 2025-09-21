@@ -1,6 +1,6 @@
-from flask import Flask, request, render_template, send_file, abort
+from flask import Flask, request, render_template, send_file, abort, redirect, url_for
 import io
-from db import init_db, add_file, get_all_files, get_file_by_id
+from db import *
 
 app = Flask(__name__)
 
@@ -46,6 +46,11 @@ def download(file_id):
         as_attachment=True
     )
 
+@app.route("/delete/<int:file_id>")
+def delete(file_id):
+    """Supprime un fichier stocké en base"""
+    delete_file_by_id(file_id)
+    return redirect(url_for("files"))
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-    

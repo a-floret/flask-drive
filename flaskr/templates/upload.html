@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload un fichier</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h2>Uploader un fichier</h2>
+    <div class="header">
+        <h1>Uploader un fichier</h1>
+        <a href="/" class="btn-retour">🏠 Retour à l’accueil</a>
+    </div>
 
     {% if message %}
         <p style="color:green;">{{ message }}</p>
@@ -16,9 +20,5 @@
         <input type="submit" value="Uploader">
     </form>
 
-    <br>
-    <form action="/">
-        <button type="submit">🏠 Retour à l’accueil</button>
-    </form>
 </body>
 </html>
