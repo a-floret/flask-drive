@@ -1,5 +1,14 @@
 Build image:
     podman build -t flask-drive -f docker/flask/Dockerfile .
+    podman build -t postgres-drive -f docker/postgres/Dockerfile .
 
 Run container
-    podman run -d --name drive -p 5000:5000 -v drive-database:/database flask-drive
+    podman run -d --name drive -p 5000:5000 flask-drive
+    podman run --name postgres --env-file flaskr/.env -p 5432:5432 -v drive-database:/var/lib/postgresql/data -d postgres-drive
+
+Use database:
+    psql -h localhost -p 5432 -U flaskuser -d flaskdb
+
+Stop and prune
+    podman stop drive && podman rm drive
+    podman stop postgres && podman rm postgres

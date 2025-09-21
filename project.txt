@@ -20,7 +20,7 @@
 
 🔹 Étape 3 : Migrer la base sqlite vers un conteneur Postgres
 
-    Construire une image avec Podmanpour de la base Postgres
+    Construire une image avec Podman pour de la base Postgres
     Monter un volume pour stocker les fichiers (afin qu’ils persistent après un redémarrage) + réseau pour faire communiquer les conteneurs
 
 🔹 Étape 4 : Multi-conteneurs

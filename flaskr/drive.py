@@ -4,9 +4,6 @@ from db import *
 
 app = Flask(__name__)
 
-# Init DB au lancement
-init_db()
-
 @app.route("/")
 def home():
     return render_template("home.html")
