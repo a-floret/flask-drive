@@ -1,0 +1,39 @@
+---
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres-drive
+    container_name: postgres
+    env_file:
+      - ../flaskr/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - drive-database:/var/lib/postgresql/data
+    networks:
+      - drive-n
+
+  drive:
+    image: flask-drive
+    container_name: drive
+    networks:
+      - drive-n
+    depends_on:
+      - postgres
+
+  proxy:
+    image: proxy-drive
+    container_name: proxy
+    ports:
+      - "8080:80"
+    networks:
+      - drive-n
+    depends_on:
+      - drive
+
+volumes:
+  drive-database:
+
+networks:
+  drive-n:

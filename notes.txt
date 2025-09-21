@@ -2,11 +2,20 @@ Build image:
     podman build -t postgres-drive -f docker/postgres/Dockerfile .
     podman build -t flask-drive -f docker/flask/Dockerfile .
     podman build -t proxy-drive -f docker/nginx/Dockerfile .
+
+Rebuild images:
+    podman build -t postgres-drive -f docker/postgres/Dockerfile --replace .
+    podman build -t flask-drive -f docker/flask/Dockerfile --replace .
+    podman build -t proxy-drive -f docker/nginx/Dockerfile --replace .
     
 Run container
     podman run -d --name postgres --env-file flaskr/.env -p 5432:5432 -v drive-database:/var/lib/postgresql/data --network drive-n postgres-drive
     podman run -d --name drive --network drive-n flask-drive
     podman run -d --name proxy -p 8080:80 --network drive-n proxy-drive
+
+Run compose:
+    podman-compose -f docker/podman-compose.yml up -d
+    podman-compose -f docker/podman-compose.yml down
 
 Use database:
     psql -h localhost -p 5432 -U flaskuser -d flaskdb
@@ -15,3 +24,7 @@ Stop and prune
     podman stop proxy && podman rm proxy
     podman stop drive && podman rm drive
     podman stop postgres && podman rm postgres
+
+Remove None images:
+    podman rmi $(podman images -q --filter "dangling=true")
+
