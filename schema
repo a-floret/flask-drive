@@ -1,0 +1,74 @@
++-------------------------------------------------------------+
+|                         Namespace: flask-drive              |
+|                                                             |
+|  +------------------+       +------------------+            |
+|  |  Service Proxy   |       | Deployment Proxy |            |
+|  | (LoadBalancer)   | <---> |   Nginx Pods x2  |            |
+|  | Port 80          |       | (listen 80)      |            |
+|  +------------------+       +------------------+            |
+|                                                             |
+|                    +-----------------------+                |
+|                    |   Service Drive       |                |
+|                    |   (ClusterIP, 5000)   |                |
+|                    +-----------------------+                |
+|                               |                             |
+|                      +---------------------+                |
+|                      | Deployment Flask    |                |
+|                      | Flask Pods x3       |                |
+|                      +---------------------+                |
+|                               |                             |
+|                    +-----------------------+                |
+|                    |  Service Postgres     |                |
+|                    | (ClusterIP, 5432)     |                |
+|                    +-----------------------+                |
+|                               |                             |
+|                 +-----------------------------+             |
+|                 | Deployment Postgres         |             |
+|                 | Pod unique                  |             |
+|                 |  - uses PVC postgres-pvc    |             |
+|                 +-----------------------------+             |
+|                               |                             |
+|                 +-----------------------------+             |
+|                 | PVC postgres-pvc            |             |
+|                 | PersistentVolume (data)     |             |
+|                 +-----------------------------+             |
+|                                                             |
++-------------------------------------------------------------+
+
+                [ User / Browser ]
+                         │
+                         ▼
+                 ┌─────────────────┐
+                 │  Service Proxy  │   (LoadBalancer, port 80)
+                 └─────────────────┘
+                          │
+                          ▼
+                ┌──────────────────┐
+                │  Deployment Proxy │ (Pods Nginx x2)
+                └──────────────────┘
+                          │
+             proxy_pass http://drive:5000
+                          │
+                          ▼
+                 ┌─────────────────┐
+                 │ Service Drive   │ (ClusterIP, port 5000)
+                 └─────────────────┘
+                          │
+                          ▼
+           ┌──────────────────────────┐
+           │ Deployment Flask API      │ (Pods Flask x3)
+           └──────────────────────────┘
+                          │
+             talks to DB (postgres:5432)
+                          │
+                          ▼
+                 ┌─────────────────┐
+                 │ Service Postgres│ (ClusterIP, 5432)
+                 └─────────────────┘
+                          │
+                          ▼
+              ┌────────────────────────┐
+              │ Deployment Postgres     │ (Pod unique)
+              │ - PVC postgres-pvc      │ (données persistantes)
+              └────────────────────────┘
+

@@ -1,5 +1,7 @@
 .venv/
+
 .env
+secrets.yml
 
 *.pyc
 __pycache__/
