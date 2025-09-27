@@ -2,27 +2,27 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Accueil</title>
+    <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Bienvenue sur mon site</h1>
-    <p>Ce site vous permet d’uploader des fichiers et de les consulter plus tard.</p>
+    <h1>Welcome on my Drive</h1>
+    <p>This site allows you to upload files and view them later.</p>
 
     <div style="margin-top:20px;">
         <form action="/upload">
-            <button type="submit">Uploader un fichier</button>
+            <button type="submit">Upload a file</button>
         </form>
 
         <form action="/files">
-            <button type="submit">Voir les fichiers</button>
+            <button type="submit">See files</button>
         </form>
     </div>
 
     <div class="header">
         <nav>
         <form method="POST" action="{{ url_for('logout') }}" style="display:inline;">
-            <button type="submit" class="logout-btn">⏻ Se déconnecter</button>
+            <button type="submit" class="logout-btn">⏻ Logout</button>
         </form>
     </nav>
     </div>

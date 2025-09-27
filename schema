@@ -69,6 +69,6 @@
                           ▼
               ┌────────────────────────┐
               │ Deployment Postgres     │ (Pod unique)
-              │ - PVC postgres-pvc      │ (données persistantes)
+              │ - PVC postgres-pvc      │ (persistent data)
               └────────────────────────┘
 

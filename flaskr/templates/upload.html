@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Upload un fichier</title>
+    <title>Upload</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="header">
-        <h1>Uploader un fichier</h1>
-        <a href="/" class="btn-retour">🏠 Retour à l’accueil</a>
+        <h1>Upload a file</h1>
+        <a href="/" class="btn-back">🏠 Back to home page</a>
     </div>
 
     {% if message %}
@@ -17,7 +17,7 @@
 
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <input type="file" name="file">
-        <input type="submit" value="Uploader">
+        <input type="submit" value="Upload">
     </form>
 
 </body>

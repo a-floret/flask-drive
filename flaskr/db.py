@@ -12,7 +12,7 @@ def get_connection():
     )
 
 def add_file(filename, data):
-    """Ajoute un fichier (nom + contenu binaire)"""
+    """Add a file (name + binary content)"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -23,7 +23,7 @@ def add_file(filename, data):
     conn.close()
 
 def get_all_files():
-    """Retourne la liste des fichiers (id, nom, date)"""
+    """Returns the list of files (ID, name, date)"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -33,7 +33,7 @@ def get_all_files():
     return rows
 
 def get_file_by_id(file_id):
-    """Retourne un fichier complet (nom + contenu)"""
+    """Returns a complete file (name + content)"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -44,7 +44,7 @@ def get_file_by_id(file_id):
     return row
 
 def delete_file_by_id(file_id):
-    """Supprime l'entrée ayant le file_id"""
+    """Deletes the entry with the file_id"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -54,7 +54,7 @@ def delete_file_by_id(file_id):
     conn.close()
 
 def check_user(username):
-    """Recupére l'id et le password hashé pour username"""
+    """Retrieve the ID and hashed password for username"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -65,7 +65,7 @@ def check_user(username):
 
 
 def create_user(username, hashed_password):
-    """Créer un nouvel utilisateur"""
+    """Create a new user"""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(

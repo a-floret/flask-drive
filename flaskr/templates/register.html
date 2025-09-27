@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Créer un compte</h1>
-    <p>Veuillez rentrer vos identifiants.</p>
+    <h1>Create an account</h1>
+    <p>Please enter your credentials.</p>
 
     {% if message_register %}
         <p style="color:rgb(200, 0, 0); font-weight: bold; white-space: pre-line;">
@@ -16,16 +16,16 @@
     {% endif %}
 
     <form method="POST" action="{{ url_for('register') }}">
-        <label for="username">Utilisateur :</label><br>
+        <label for="username">User :</label><br>
         <input type="text" id="username" name="username" value="{{ username or '' }}" required><br><br>
 
-        <label for="password">Mot de passe :</label><br>
+        <label for="password">Password :</label><br>
         <input type="password" id="password" name="password" required><br><br>
 
-        <label for="password">Confirmer le Mot de passe :</label><br>
+        <label for="password">Confirm Password:</label><br>
         <input type="password" id="password_c" name="password_c" required><br><br>
 
-        <button type="submit">Créer le compte</button>
+        <button type="submit">Create account</button>
     </form>
 
 </body>

@@ -44,7 +44,7 @@ def login():
             session["user_id"] = fetch[0]
             return redirect(url_for("home"))  
         else:
-            message = "Identifiants incorrects ❌"
+            message = "Incorrect credentials ❌"
 
     return render_template("login.html", message_login=message)
 
@@ -58,25 +58,25 @@ def register():
         password_c = request.form["password_c"]
 
         if check_user(username):
-            message = "Nom d’utilisateur déjà pris ❌"
+            message = "Username already taken ❌"
             return render_template("register.html", message_register=message, username=username)
         
 
         if not schema.validate(password):
             message = (
-                "⚠️ Mot de passe faible ⚠️\n"
-                "Le mot de passe doit contenir:\n"
-                "- Entre 8 et 25 caractères\n"
-                "- chiffres, lettres, caractères (pas d'espaces), minuscule, majuscule"
+                "⚠️ Weak password  ⚠️\n"
+                "The password must contain:\n\n"
+                "- Between 8 and 25 characters\n"
+                "- numbers, letters, characters (no spaces), lowercase, uppercase"
             )
             return render_template("register.html", message_register= message, username=username)
 
         if password == password_c:
             create_user(username, generate_password_hash(password))
-            flash("Compte créé avec succès ✅")
+            flash("Account successfully created  ✅")
             return redirect(url_for("login"))
         else:
-            message = "Les mots de passe ne sont pas identiques ❌"
+            message = "Passwords are not identical  ❌"
             return render_template("register.html", message_register= message, username=username) 
 
     return render_template("register.html", message_register=message)
@@ -93,15 +93,15 @@ def upload():
     message = None
     if request.method == "POST":
         if "file" not in request.files:
-            message = "Aucun fichier reçu"
+            message = "No files received"
         else:
             file = request.files["file"]
             if file.filename == "":
-                message = "Nom de fichier vide"
+                message = "Empty file name"
             else:
                 data = file.read()
                 add_file(file.filename, data)
-                message = f"✅ Fichier {file.filename} enregistré en base !"
+                message = f"✅ File {file.filename} saved in database  !"
 
     return render_template("upload.html", message=message)
 
@@ -114,7 +114,7 @@ def files():
 @app.route("/download/<int:file_id>")
 @login_required
 def download(file_id):
-    """Télécharge un fichier stocké en base"""
+    """Download a file stored in the database"""
     row = get_file_by_id(file_id)
     if row is None:
         abort(404)
@@ -128,7 +128,7 @@ def download(file_id):
 @app.route("/delete/<int:file_id>")
 @login_required
 def delete(file_id):
-    """Supprime un fichier stocké en base"""
+    """Deletes a file stored in the database"""
     delete_file_by_id(file_id)
     return redirect(url_for("files"))
 

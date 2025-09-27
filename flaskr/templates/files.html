@@ -2,20 +2,20 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des fichiers</title>
+    <title>List of files</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="header">
-        <h1>📂 Fichiers disponibles</h1>
-        <a href="/" class="btn-retour">🏠 Retour à l’accueil</a>
+        <h1>📂 Available files</h1>
+        <a href="/" class="btn-back">🏠 Back to home page</a>
     </div>
     <ul>
         {% for id, filename, uploaded_at in files %}
             <li>
-                {{ filename }} (ajouté le {{ uploaded_at }} UTC)
-                — <a href="{{ url_for('download', file_id=id) }}">⬇️ Télécharger</a>
-                — <a href="{{ url_for('delete', file_id=id) }}" style="color:red;">❌ Supprimer</a>
+                {{ filename }} (added on {{ uploaded_at }} UTC)
+                — <a href="{{ url_for('download', file_id=id) }}">⬇️ Download</a>
+                — <a href="{{ url_for('delete', file_id=id) }}" style="color:red;">❌ Delete</a>
             </li>
         {% endfor %}
     </ul>

@@ -1,45 +1,45 @@
-/* Style global du corps de la page */
+/* Corps main style */
 body {
-    font-family: Arial, sans-serif; /* Police de caractères */
-    background-color: #f5f5f5;      /* Couleur de fond claire */
-    color: #333;                    /* Couleur du texte */
-    text-align: center;             /* Centre le texte */
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: center;
     margin: 0;
     padding: 0;
 }
 
-/* Titre principal */
+/* Main title */
 h1 {
-    color: #2c3e50;       /* Bleu foncé */
+    color: #2c3e50;
     margin-top: 40px;
 }
 
-/* Paragraphes */
+/* Paragraphs */
 p {
     font-size: 18px;
     margin: 20px auto;
-    width: 60%;           /* Largeur limitée pour une meilleure lecture */
+    width: 60%;           /* Limited width for better readability */
 }
 
-/* Boutons */
+/* Buttons */
 button:not(.logout-btn) {
-    background-color: #3498db;  /* Bleu */
+    background-color: #3498db;
     color: white;
     border: none;
     padding: 10px 20px;
     margin: 10px;
     font-size: 16px;
-    border-radius: 5px;         /* Coins arrondis */
+    border-radius: 5px;         /* Rounded corners */
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 /* Effet au survol */
 button:not(.logout-btn):hover {
-    background-color: #2980b9; /* Bleu plus foncé */
+    background-color: #2980b9;
 }
 
-/* Conteneur du formulaire */
+/*  Form container */
 form {
     margin: 40px auto;
     padding: 20px;
@@ -50,16 +50,16 @@ form {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Champ "input type=file" */
+/* Field "input type=file" */
 input[type="file"] {
     display: block;
     margin: 10px auto 20px auto;
     font-size: 14px;
 }
 
-/* Bouton "Uploader" */
+/* Button "Upload" */
 input[type="submit"] {
-    background-color: #27ae60;  /* Vert */
+    background-color: #27ae60;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -69,13 +69,12 @@ input[type="submit"] {
     transition: background-color 0.3s;
 }
 
-/* Effet au survol du bouton */
 input[type="submit"]:hover {
-    background-color: #1e8449; /* Vert plus foncé */
+    background-color: #1e8449;
 }
 
 button.logout-btn {
-    background-color: #e74c3c; /* rouge */
+    background-color: #e74c3c;
     border: none;
     padding: 10px 20px;
     color: white;
@@ -88,17 +87,17 @@ button.logout-btn:hover {
     background-color: #c0392b;
 }
 
-/* En-tête : texte à gauche, bouton à droite */
+/* Header: text on the left, button on the right */
 .header {
     display: flex;
-    justify-content: space-between; /* espace entre gauche et droite */
-    align-items: center;            /* aligne verticalement */
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
 }
 
-/* Bouton retour */
-.btn-retour {
-    background-color: #e74c3c; /* Rouge */
+
+.btn-back {
+    background-color: #e74c3c;
     color: white;
     text-decoration: none;
     padding: 8px 16px;
@@ -106,35 +105,34 @@ button.logout-btn:hover {
     transition: background-color 0.3s;
 }
 
-/* Effet hover */
-.btn-retour:hover {
-    background-color: #c0392b; /* Rouge plus foncé */
+.btn-back:hover {
+    background-color: #c0392b;
 }
 
 
-/* Liste des fichiers */
+/* List */
 ul {
-    list-style-type: none;   /* enlève les puces par défaut */
-    padding-left: 0;         /* supprime le retrait par défaut */
+    list-style-type: none;
+    padding-left: 0;
     margin: 20px;
-    text-align: left;        /* aligne bien le texte à gauche */
+    text-align: left;
 }
 
-/* Chaque élément de la liste */
+/* List elements */
 li {
     margin-bottom: 10px;
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 6px;
-    width: fit-content;      /* la boîte s’adapte au contenu */
+    width: fit-content;
 }
 
-/* Liens dans la liste */
+/* Link in list */
 li a {
     margin-left: 10px;
     text-decoration: none;
-    color: #3498db;          /* bleu pour les liens */
+    color: #3498db;
 }
 
 li a:hover {
