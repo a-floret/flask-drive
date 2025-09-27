@@ -17,6 +17,10 @@ Run compose
     podman-compose -f docker/podman-compose.yml up -d
     podman-compose -f docker/podman-compose.yml down
 
+Force rebuild database
+    podman-compose -f docker/podman-compose.yml down -v
+    podman-compose -f docker/podman-compose.yml up -d
+
 Use database
     psql -h localhost -p 5432 -U flaskuser -d flaskdb
 

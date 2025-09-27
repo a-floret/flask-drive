@@ -52,3 +52,25 @@ def delete_file_by_id(file_id):
         (file_id,))
     conn.commit()
     conn.close()
+
+def check_user(username):
+    """Recupére l'id et le password hashé pour username"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT id, password_hash FROM users WHERE username = %s", 
+        (username,))
+    user = cursor.fetchone()
+    return user
+
+
+def create_user(username, hashed_password):
+    """Créer un nouvel utilisateur"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO users (username, password_hash) VALUES (%s, %s)", 
+        (username, hashed_password)
+    )
+    conn.commit()
+    conn.close()

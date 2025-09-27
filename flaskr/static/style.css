@@ -22,7 +22,7 @@ p {
 }
 
 /* Boutons */
-button {
+button:not(.logout-btn) {
     background-color: #3498db;  /* Bleu */
     color: white;
     border: none;
@@ -35,7 +35,7 @@ button {
 }
 
 /* Effet au survol */
-button:hover {
+button:not(.logout-btn):hover {
     background-color: #2980b9; /* Bleu plus foncé */
 }
 
@@ -72,6 +72,20 @@ input[type="submit"] {
 /* Effet au survol du bouton */
 input[type="submit"]:hover {
     background-color: #1e8449; /* Vert plus foncé */
+}
+
+button.logout-btn {
+    background-color: #e74c3c; /* rouge */
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.logout-btn:hover {
+    background-color: #c0392b;
 }
 
 /* En-tête : texte à gauche, bouton à droite */

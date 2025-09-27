@@ -18,5 +18,16 @@
             <button type="submit">Voir les fichiers</button>
         </form>
     </div>
+
+    <div class="header">
+        <nav>
+        <form method="POST" action="{{ url_for('logout') }}" style="display:inline;">
+            <button type="submit" class="logout-btn">⏻ Se déconnecter</button>
+        </form>
+    </nav>
+    </div>
+    
+</form>
+
 </body>
 </html>
