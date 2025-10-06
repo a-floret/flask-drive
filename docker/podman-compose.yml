@@ -13,6 +13,12 @@ services:
       - drive-database:/var/lib/postgresql/data
     networks:
       - drive-n
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   drive:
     image: flask-drive

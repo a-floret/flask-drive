@@ -1,24 +1,44 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - MiniDrive</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="header">
-        <h1>Upload a file</h1>
-        <a href="/" class="btn-back">🏠 Back to home page</a>
+    <div class="container">
+        <div class="header">
+            <h1>📤 Upload a file</h1>
+            <a href="{{ url_for('home') }}" class="btn-back">🏠 Back to home</a>
+        </div>
+
+        {% if message %}
+            <div class="flash {{ message_type or 'success' }}">{{ message }}</div>
+        {% endif %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+            <div>
+                <label for="file">Choose a file:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            
+            <button type="submit">Upload</button>
+        </form>
+
+        <p class="text-center mt-3">
+            <a href="{{ url_for('files') }}">📁 View all files</a>
+        </p>
     </div>
-
-    {% if message %}
-        <p style="color:green;">{{ message }}</p>
-    {% endif %}
-
-    <form method="POST" action="/upload" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
-
 </body>
 </html>

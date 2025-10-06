@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - MiniDrive</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome on my Drive</h1>
-    <p>This site allows you to upload files and view them later.</p>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 
-    <div style="margin-top:20px;">
-        <form action="/upload">
-            <button type="submit">Upload a file</button>
-        </form>
+        <h1>🚀 Welcome to MiniDrive</h1>
+        <p>This site allows you to upload files and view them later securely.</p>
 
-        <form action="/files">
-            <button type="submit">See files</button>
-        </form>
-    </div>
+        <div class="home-actions">
+            <form action="{{ url_for('upload') }}">
+                <button type="submit">📤 Upload a file</button>
+            </form>
 
-    <div class="header">
+            <form action="{{ url_for('files') }}">
+                <button type="submit">📁 See files</button>
+            </form>
+        </div>
+
         <nav>
-        <form method="POST" action="{{ url_for('logout') }}" style="display:inline;">
-            <button type="submit" class="logout-btn">⏻ Logout</button>
-        </form>
-    </nav>
+            <form method="POST" action="{{ url_for('logout') }}">
+                <button type="submit" class="logout-btn">🔓 Logout</button>
+            </form>
+        </nav>
     </div>
-    
-</form>
-
 </body>
 </html>

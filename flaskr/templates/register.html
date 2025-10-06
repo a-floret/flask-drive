@@ -1,32 +1,43 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MiniDrive</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Create an account</h1>
-    <p>Please enter your credentials.</p>
+    <div class="container">
+        <h1>✨ Create an account</h1>
+        <p>Join MiniDrive and start storing your files securely.</p>
 
-    {% if message_register %}
-        <p style="color:rgb(200, 0, 0); font-weight: bold; white-space: pre-line;">
-            {{ message_register }}
+        {% if message_register %}
+            <div class="flash error" style="white-space: pre-line;">{{ message_register }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('register') }}">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ username or '' }}" required autofocus>
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div>
+                <label for="password_c">Confirm Password:</label>
+                <input type="password" id="password_c" name="password_c" required>
+            </div>
+
+            <button type="submit">Create account</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Already have an account? 
+            <a href="{{ url_for('login') }}"><strong>Log in here</strong></a>
         </p>
-    {% endif %}
-
-    <form method="POST" action="{{ url_for('register') }}">
-        <label for="username">User :</label><br>
-        <input type="text" id="username" name="username" value="{{ username or '' }}" required><br><br>
-
-        <label for="password">Password :</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-
-        <label for="password">Confirm Password:</label><br>
-        <input type="password" id="password_c" name="password_c" required><br><br>
-
-        <button type="submit">Create account</button>
-    </form>
-
+    </div>
 </body>
 </html>
